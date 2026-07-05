@@ -113,6 +113,31 @@ Log centrale di stato progetto. Aggiornato a ogni milestone, fase completata, o 
 
 ---
 
+### 2026-07-05 — Phase 5 — A11y Audit + Fixes (Fase 3)
+- **phase**: "5"
+- **milestone**: "Accessibility baseline: ARIA, keyboard nav, focus management"
+- **status**: "COMPLETED"
+- **tasks**:
+  - "TASK-007: A11y audit completo (15+ aree identificate) - PASS"
+  - "TASK-008: ARIA attributes su tutti i componenti - PASS"
+  - "TASK-009: Keyboard nav su card header (role=button, tabIndex, key handler) - PASS"
+  - "TASK-010: aria-label su icon-only buttons (10 buttons) - PASS"
+  - "TASK-011: Dialog role + aria-modal su modali (2 modali) - PASS"
+  - "TASK-012: aria-live region su chat + alert role su error banner - PASS"
+  - "TASK-013: aria-expanded/aria-controls su collapsible sections - PASS"
+  - "TASK-014: TypeScript + test + build verifica post-fix - PASS"
+- **decisions**:
+  - "Responsive mobile non necessario: dashboard è strumento desktop monitoring"
+  - "Rimosse variabili inutilizzate durante fix a11y (side effect positivo)"
+  - "WalkingWorker decorativo ha aria-hidden=true"
+- **blockers**: []
+- **next_steps**:
+  - "CI pipeline (GitHub Actions: lint → typecheck → test → build)"
+  - "WebSocket reconnect backoff esponenziale in useOrchestrator.ts"
+  - "Coverage test > 80%"
+
+---
+
 ### Template per Future Entries
 ```yaml
 - date: "2026-XX-XX"
@@ -126,9 +151,9 @@ Log centrale di stato progetto. Aggiornato a ogni milestone, fase completata, o 
 ```
 
 ## 4. Stato Corrente Progetto
-- **Fase attiva**: Phase 5 (Dashboard Frontend Stabilization)
-- **Prossima milestone**: Full pipeline green (typecheck, build, test)
-- **Task completati**: 23 (16 docs + 7 E2E/frontend)
+- **Fase attiva**: Phase 5 (A11y Audit + Fixes)
+- **Prossima milestone**: Accessibility baseline complete
+- **Task completati**: 30 (16 docs + 14 E2E/frontend/a11y)
 - **Blockers attivi**: 0
 
 ## 5. Metriche
@@ -137,10 +162,11 @@ Log centrale di stato progetto. Aggiornato a ogni milestone, fase completata, o 
 | Fasi completate | 5/5+ |
 | Documenti core | 9 |
 | Documenti operativi Phase 5 | 9/9 |
-| Task totali | 23 |
-| Task PASS | 23 |
+| Task totali | 30 |
+| Task PASS | 30 |
 | Task IN_PROGRESS | 0 |
 | Blockers | 0 |
 | Test suite | 15 tests (2 files) |
 | TypeScript errors | 0 |
-| Build time | 571ms |
+| Build time | ~570ms |
+| A11y fixes | 15+ aree (ARIA, keyboard, focus) |
