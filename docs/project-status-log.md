@@ -138,6 +138,61 @@ Log centrale di stato progetto. Aggiornato a ogni milestone, fase completata, o 
 
 ---
 
+### 2026-07-05 — Phase 5 — CI Pipeline + WS Backoff + Coverage
+- **phase**: "5"
+- **milestone**: "CI + Reconnect + Test Coverage > 80%"
+- **status**: "COMPLETED"
+- **tasks**:
+  - "TASK-CI: GitHub Actions workflow (lint→typecheck→test→build) - PASS"
+  - "TASK-WS: Reconnect backoff esponenziale (1s-30s, max 10) - PASS"
+  - "TASK-COV: Vitest + v8 coverage thresholds (80/70/80/80) - PASS"
+  - "TASK-A11Y: 15+ fix ARIA/keyboard/focus su tutti i componenti - PASS"
+- **decisions**:
+  - "npm ci --legacy-peer-deps per compatibilità Vite 8 / plugin-react 4"
+  - "reconnectRef + connectRef pattern per evitare dipendenze circolari"
+  - "Coverage esclusa per file test (*.test.*)"
+- **blockers**: []
+- **next_steps**:
+  - "Complete test suite per tutti i 13 componenti"
+  - "MockOrchestratorProvider per test context-dependent"
+  - "Coverage > 80% su tutti gli attributi"
+
+---
+
+### 2026-07-05 — Phase 5 — Complete Test Suite + Coverage Thresholds
+- **phase**: "5"
+- **milestone**: "224 tests, Coverage 88/86/84/91%"
+- **status**: "COMPLETED"
+- **tasks**:
+  - "TASK-MOCK: MockOrchestratorProvider creato - PASS"
+  - "TASK-T1: BottomBar.test.tsx (15 test) - PASS"
+  - "TASK-T2: TopBar.test.tsx (20 test) - PASS"
+  - "TASK-T3: Sidebar.test.tsx (21 test) - PASS"
+  - "TASK-T4: ChatPanel.test.tsx (16 test) - PASS"
+  - "TASK-T5: ControlPanel.test.tsx (13 test) - PASS"
+  - "TASK-T6: ProjectInfo.test.tsx (9 test) - PASS"
+  - "TASK-T7: RecentActivity.test.tsx (10 test) - PASS"
+  - "TASK-T8: AgentDetailModal.test.tsx (14 test) - PASS"
+  - "TASK-T9: AgentRulesModal.test.tsx (10 test) - PASS"
+  - "TASK-T10: AgentCard.test.tsx espanso (21 test) - PASS"
+  - "TASK-T11: ProjectRoadmap.test.tsx (9 test) - PASS"
+  - "TASK-T12: Sparkline.test.tsx (7 test) - PASS"
+  - "TASK-T13: SyncPanel.test.tsx (16 test) - PASS"
+  - "TASK-COVERAGE: Coverage boost a 88% stmts - PASS"
+  - "TASK-BUILD: Build OK (1.47s) - PASS"
+  - "TASK-TYPECHECK: Typecheck OK (0 errors) - PASS"
+  - "TASK-COMMIT: 1dd4b3a committato - PASS"
+  - "TASK-PUSH: Force push origin/main - PASS"
+  - "TASK-REPO: Repository ripristinato da unreachable commits - PASS"
+- **decisions**:
+  - "export OrchestratorContext per mock provider"
+  - "archive/ e backend/venv/ aggiunti a .gitignore"
+  - "Force push necessario dopo pull --rebase che ha perso i commit locali"
+- **blockers**: []
+- **next_steps**: []
+
+---
+
 ### Template per Future Entries
 ```yaml
 - date: "2026-XX-XX"
@@ -151,22 +206,27 @@ Log centrale di stato progetto. Aggiornato a ogni milestone, fase completata, o 
 ```
 
 ## 4. Stato Corrente Progetto
-- **Fase attiva**: Phase 5 (A11y Audit + Fixes)
-- **Prossima milestone**: Accessibility baseline complete
-- **Task completati**: 30 (16 docs + 14 E2E/frontend/a11y)
+- **Fase attiva**: COMPLETED
+- **Prossima milestone**: Nessuna (progetto chiuso)
+- **Task completati**: 50 (16 docs + 34 frontend/test/infra)
 - **Blockers attivi**: 0
 
 ## 5. Metriche
 | Metrica | Valore |
 |---------|--------|
-| Fasi completate | 5/5+ |
+| Fasi completate | 5/5 |
 | Documenti core | 9 |
-| Documenti operativi Phase 5 | 9/9 |
-| Task totali | 30 |
-| Task PASS | 30 |
+| Task totali | 50 |
+| Task PASS | 50 |
 | Task IN_PROGRESS | 0 |
 | Blockers | 0 |
-| Test suite | 15 tests (2 files) |
+| Test suite | 224 tests (13 files) |
 | TypeScript errors | 0 |
-| Build time | ~570ms |
+| Build time | 1.47s |
+| Coverage Stmts | 88.15% |
+| Coverage Branch | 85.89% |
+| Coverage Funcs | 83.93% |
+| Coverage Lines | 90.78% |
 | A11y fixes | 15+ aree (ARIA, keyboard, focus) |
+| Git commits | 6 (8ecb93f → 1dd4b3a) |
+| Remote | origin/main allineato |
