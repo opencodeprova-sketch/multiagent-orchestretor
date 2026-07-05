@@ -1,0 +1,168 @@
+{
+  "agents": {
+    "manager": {
+      "id": "manager",
+      "name": "Manager",
+      "color": "#f97316",
+      "progress": 25,
+      "status": "operational",
+      "activities": [
+        {
+          "label": "Analizzando ambito progetto...",
+          "status": "OK"
+        },
+        {
+          "label": "Raffinamento struttura task...",
+          "status": "PENDING"
+        },
+        {
+          "label": "Allocazione sotto-task agli agenti...",
+          "status": "PENDING"
+        }
+      ],
+      "files": [],
+      "stats": {
+        "completed": 18,
+        "in_progress": 7,
+        "waiting": 4
+      },
+      "spark_data": [
+        20,
+        35,
+        30,
+        45,
+        50,
+        42,
+        60,
+        55,
+        68,
+        72,
+        65,
+        25
+      ]
+    },
+    "architect": {
+      "id": "architect",
+      "name": "Architect",
+      "color": "#3b82f6",
+      "progress": 15,
+      "status": "operational",
+      "activities": [
+        {
+          "label": "Progettazione componenti sistema...",
+          "status": "OK"
+        },
+        {
+          "label": "Diagramma flusso dati...",
+          "status": "OK"
+        },
+        {
+          "label": "Documentazione dipendenze...",
+          "status": "PENDING"
+        }
+      ],
+      "files": [],
+      "stats": {
+        "completed": 12,
+        "in_progress": 6,
+        "waiting": 3
+      },
+      "spark_data": [
+        15,
+        25,
+        40,
+        35,
+        50,
+        45,
+        55,
+        60,
+        52,
+        58,
+        62,
+        15
+      ]
+    },
+    "coder": {
+      "id": "coder",
+      "name": "Coder",
+      "color": "#22c55e",
+      "progress": 10,
+      "status": "operational",
+      "activities": [
+        {
+          "label": "Crea API e struttura progetto",
+          "status": "OK"
+        },
+        {
+          "label": "Implementazione main.py",
+          "status": "PENDING"
+        }
+      ],
+      "files": [],
+      "stats": {
+        "completed": 8,
+        "in_progress": 5,
+        "waiting": 2
+      },
+      "spark_data": [
+        10,
+        20,
+        15,
+        30,
+        25,
+        35,
+        40,
+        38,
+        45,
+        50,
+        48,
+        10
+      ]
+    },
+    "tester": {
+      "id": "tester",
+      "name": "Tester",
+      "color": "#a855f7",
+      "progress": 5,
+      "status": "operational",
+      "activities": [
+        {
+          "label": "Definizione test e mock API",
+          "status": "OK"
+        },
+        {
+          "label": "Scrittura test_api.py",
+          "status": "PENDING"
+        }
+      ],
+      "files": [],
+      "stats": {
+        "completed": 6,
+        "in_progress": 4,
+        "waiting": 1
+      },
+      "spark_data": [
+        10,
+        15,
+        12,
+        20,
+        18,
+        25,
+        22,
+        28,
+        30,
+        32,
+        35,
+        5
+      ]
+    }
+  },
+  "chat_history": [],
+  "project_progress": 55,
+  "settings": {
+    "full_auto": true,
+    "human_approval": false,
+    "autonomy_level": "medium",
+    "last_sync": "06:06"
+  }
+}

@@ -3,7 +3,7 @@ import { useOrchestrator } from '../hooks/useOrchestrator';
 
 type OrchestratorContextValue = ReturnType<typeof useOrchestrator>;
 
-const OrchestratorContext = createContext<OrchestratorContextValue | null>(null);
+export const OrchestratorContext = createContext<OrchestratorContextValue | null>(null);
 
 export function OrchestratorProvider({ children }: { children: ReactNode }) {
   const value = useOrchestrator();

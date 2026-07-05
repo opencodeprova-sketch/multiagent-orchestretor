@@ -36,4 +36,16 @@ describe('Sparkline', () => {
     expect(path).toBeInTheDocument();
     expect(path?.getAttribute('d')).toContain('M');
   });
+
+  it('gestisce tutti valori uguali (range=0)', () => {
+    const { container } = render(<Sparkline data={[5, 5, 5]} color="#22c55e" />);
+    const path = container.querySelector('path.sparkline');
+    expect(path?.getAttribute('d')).toContain('M');
+  });
+
+  it('genera area fill gradient', () => {
+    const { container } = render(<Sparkline data={data} color="#a855f7" />);
+    const paths = container.querySelectorAll('path');
+    expect(paths.length).toBeGreaterThanOrEqual(2);
+  });
 });
