@@ -317,8 +317,9 @@ export default function Sidebar({
           <SectionHeader label="Agenti" count={agentCount} />
 
         {/* Agent tree da OpenCode config */}
-        {Object.entries(opencodeConfig?.agents ?? {}).map(([id, data]: [string, any]) => {
-          const name = data.name ?? id;
+        {Object.entries(opencodeConfig?.agents ?? {}).map(([id, data]) => {
+          const agentData = data as { name?: string; content?: string } | undefined;
+          const name = agentData?.name ?? id;
           // Stato agente in tempo reale da agentsList
           const liveAgent = agentsList.find((a) => a.id === id);
           const agentStatus = liveAgent?.status ?? 'idle';

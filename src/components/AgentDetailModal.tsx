@@ -29,23 +29,6 @@ export default function AgentDetailModal({
   const termRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const agent = agentsList.find((a) => a.id === agentId);
-  if (!agent) return null;
-
-  const color = agent.color;
-  const statusLabel = STATUS_LABEL[agent.status] ?? 'OPERATIVO';
-  const statusGrad = statusGradients[statusLabel] ?? 'from-slate-400 to-gray-400';
-
-  const agentLogs = logs
-    .filter((l) => l.agent_id === agentId || l.agent === agent.name)
-    .slice(-50);
-
-  useEffect(() => {
-    if (termRef.current) {
-      termRef.current.scrollTop = termRef.current.scrollHeight;
-    }
-  }, [agentLogs.length]);
-
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -53,6 +36,24 @@ export default function AgentDetailModal({
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [onClose]);
+
+  // agentLogs calcolato prima di early return per hooks rule
+  const agent = agentsList.find((a) => a.id === agentId);
+  const agentLogs = agent
+    ? logs.filter((l) => l.agent_id === agentId || l.agent === agent.name).slice(-50)
+    : [];
+
+  useEffect(() => {
+    if (termRef.current) {
+      termRef.current.scrollTop = termRef.current.scrollHeight;
+    }
+  }, [agentLogs.length]);
+
+  if (!agent) return null;
+
+  const color = agent.color;
+  const statusLabel = STATUS_LABEL[agent.status] ?? 'OPERATIVO';
+  const statusGrad = statusGradients[statusLabel] ?? 'from-slate-400 to-gray-400';
 
   return (
     <div

@@ -136,7 +136,7 @@ export default function TopBar({ memoryTrigger = 0 }: { memoryTrigger?: number }
     sendChat(`/boot-progetto ${folderPath}`, 'coder');
     // Reset input
     if (projectPickerRef.current) projectPickerRef.current.value = '';
-  }, [send]);
+  }, [send, sendChat]);
 
   return (
     <header className="h-11 flex items-center gap-3 px-4 bg-[#0b0f19] border-b border-[#1e2a45] flex-shrink-0">
