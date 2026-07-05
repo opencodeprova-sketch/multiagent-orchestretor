@@ -66,7 +66,7 @@ export default function ChatPanel() {
       </div>
 
       {/* Messages */}
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto scrollbar-thin px-4 py-4 flex flex-col gap-2 high-contrast">
+      <div ref={scrollRef} role="log" aria-live="polite" aria-label="Messaggi chat" className="flex-1 min-h-0 overflow-y-auto scrollbar-thin px-4 py-4 flex flex-col gap-2 high-contrast">
         {displayMessages.length === 0 ? (
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">

@@ -33,10 +33,10 @@ export default function RecentActivity() {
   return (
     <div className="flex flex-col h-full bg-[#0f1525] border border-[#1e2a45] rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-[#1e2a45] flex-shrink-0">
-        <h3 className="text-xs font-semibold text-[#e8edf8]">Attività Recenti</h3>
+        <h3 id="recent-activity-title" className="text-xs font-semibold text-[#e8edf8]">Attività Recenti</h3>
       </div>
 
-      <div className="flex-1 overflow-y-auto scrollbar-thin p-3 flex flex-col gap-3">
+      <div id="recent-activity-feed" role="feed" aria-labelledby="recent-activity-title" className="flex-1 overflow-y-auto scrollbar-thin p-3 flex flex-col gap-3">
         {activities.map((a, i) => {
           const icon = AGENT_ICONS[a.agent];
           return (
@@ -62,6 +62,8 @@ export default function RecentActivity() {
       <div className="px-4 py-2 border-t border-[#1e2a45]">
         <button
           type="button"
+          aria-expanded={showAll}
+          aria-controls="recent-activity-feed"
           onClick={() => setShowAll((p) => !p)}
           className="text-[10px] text-blue-400 hover:text-blue-300 transition-colors"
         >

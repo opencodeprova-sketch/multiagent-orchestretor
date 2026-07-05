@@ -57,6 +57,9 @@ export default function AgentDetailModal({
   return (
     <div
       ref={overlayRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Dettaglio agente ${agent.name}`}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
       onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
     >
@@ -74,6 +77,7 @@ export default function AgentDetailModal({
         {/* Close button */}
         <button
           type="button"
+          aria-label={`Chiudi dettaglio ${agent.name}`}
           onClick={onClose}
           className="absolute top-3 right-3 z-10 w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-200 hover:scale-110"
           style={{

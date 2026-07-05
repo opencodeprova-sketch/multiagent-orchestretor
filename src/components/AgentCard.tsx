@@ -317,9 +317,12 @@ export default function AgentCard({
 
       {/* Header — clickable apre dettaglio */}
       <div
-        className="relative px-4 pt-4 pb-2 flex items-center gap-3 cursor-pointer"
+        role="button"
+        tabIndex={0}
+        className="relative px-4 pt-4 pb-2 flex items-center gap-3 cursor-pointer focus-visible:outline-2 focus-visible:outline-blue-500/50"
         style={{ background: `linear-gradient(135deg, ${color}15, ${color}05)` }}
         onClick={() => onAgentClick?.(agentId ?? name)}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onAgentClick?.(agentId ?? name); } }}
       >
         <div
           className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-lg transition-transform duration-300 group-hover:scale-110"
@@ -351,6 +354,7 @@ export default function AgentCard({
           {onStop && agentId && (
             <button
               type="button"
+              aria-label={isWorking ? `Interrompi lavoro di ${name}` : `Nessun lavoro in corso per ${name}`}
               onClick={(e) => { e.stopPropagation(); onStop(agentId); }}
               title={isWorking ? 'Interrompi lavoro' : 'Nessun lavoro in corso'}
               className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-bold transition-all duration-200 hover:scale-110 active:scale-95"
@@ -455,7 +459,7 @@ export default function AgentCard({
       </div>
 
       {/* Walking worker — solo quando lavora */}
-      {isWorking && <WalkingWorker color={color} />}
+      {isWorking && <div aria-hidden="true"><WalkingWorker color={color} /></div>}
 
       {/* Footer dinamico per tipo agente */}
       {isDirettore && onCommand ? (

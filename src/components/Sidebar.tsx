@@ -123,10 +123,12 @@ function CollapsibleSection({
 }) {
   return (
     <div className="mb-1">
-      <button
-        type="button"
-        onClick={onToggle}
-        className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-all duration-200 flex items-center justify-between group ${
+        <button
+          type="button"
+          aria-expanded={expanded}
+          aria-controls={`section-${label.toLowerCase().replace(/\s+/g, '-')}`}
+          onClick={onToggle}
+          className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-all duration-200 flex items-center justify-between group ${
           expanded
             ? 'text-blue-300 bg-[#ffffff05]'
             : 'text-[#5a6585] hover:text-[#8a96b4] hover:bg-[#ffffff04]'
@@ -149,7 +151,7 @@ function CollapsibleSection({
         </div>
       </button>
       {expanded && (
-        <div className="ml-3 flex flex-col gap-0.5 py-1.5 px-1">
+        <div id={`section-${label.toLowerCase().replace(/\s+/g, '-')}`} className="ml-3 flex flex-col gap-0.5 py-1.5 px-1">
           {children}
         </div>
       )}
@@ -169,12 +171,13 @@ function ToggleSwitch({
   return (
     <div className="group/toggle flex items-center justify-between px-2 py-1 rounded-lg hover:bg-[#ffffff06] transition-all duration-150">
       <span className="text-[10px] text-[#8a96b4] group-hover/toggle:text-[#a8b4d4] transition-colors">{label}</span>
-      <button
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        onClick={() => onChange(!checked)}
-        className={`relative h-4 w-7 rounded-full transition-all duration-300 flex-shrink-0 ${
+        <button
+          type="button"
+          role="switch"
+          aria-checked={checked}
+          aria-label={`${label}: ${checked ? 'attivo' : 'disattivo'}`}
+          onClick={() => onChange(!checked)}
+          className={`relative h-4 w-7 rounded-full transition-all duration-300 flex-shrink-0 ${
           checked ? 'bg-gradient-to-r from-blue-500 to-cyan-400 shadow-[0_0_8px_rgba(59,130,246,0.3)]' : 'bg-[#2a3352]'
         }`}
       >

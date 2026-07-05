@@ -37,7 +37,7 @@ export default function App() {
       <TopBar memoryTrigger={memoryTrigger} />
 
       {lastError && !connected && (
-        <div className="px-4 py-1.5 bg-red-500/10 border-b border-red-500/20 text-[11px] text-red-400 flex-shrink-0">
+        <div role="alert" className="px-4 py-1.5 bg-red-500/10 border-b border-red-500/20 text-[11px] text-red-400 flex-shrink-0">
           {lastError} — avvia il backend con start-backend.bat
         </div>
       )}
@@ -52,7 +52,7 @@ export default function App() {
         <main className="flex-1 flex flex-col min-w-0 p-3 gap-3 overflow-hidden">
           {/* Agent cards row — solo agenti visibili */}
           {visibleAgents.length > 0 && (
-            <div className="grid gap-3 flex-shrink-0" style={{ gridTemplateColumns: `repeat(${Math.min(visibleAgents.length, 6)}, 1fr)` }}>
+            <div role="region" aria-label="Stato agenti" className="grid gap-3 flex-shrink-0" style={{ gridTemplateColumns: `repeat(${Math.min(visibleAgents.length, 6)}, 1fr)` }}>
               {visibleAgents.map((a) => (
                 <AgentCard
                   key={a.id}

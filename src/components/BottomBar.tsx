@@ -91,6 +91,7 @@ export default function BottomBar() {
         <div className="flex items-center gap-1.5">
           <button
             type="button"
+            aria-label="Visualizza log attività"
             onClick={() => setShowLogs(true)}
             className="px-2.5 py-0.5 text-[9px] text-[#5a6585] hover:text-[#8a96b4] bg-[#161b27] border border-[#1e2a45] rounded-lg hover:bg-[#1e2a45] transition-all duration-150"
           >
@@ -98,6 +99,7 @@ export default function BottomBar() {
           </button>
           <button
             type="button"
+            aria-label="Esporta report"
             onClick={exportReport}
             className="px-2.5 py-0.5 text-[9px] text-[#5a6585] hover:text-[#8a96b4] bg-[#161b27] border border-[#1e2a45] rounded-lg hover:bg-[#1e2a45] transition-all duration-150"
           >
