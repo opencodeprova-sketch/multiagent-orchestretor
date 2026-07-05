@@ -1,0 +1,81 @@
+{
+  "task_id": "TASK-002",
+  "phase": "5",
+  "objective": "Suddividere dashboard AgentStatusPanel in fasi implementative ordinate e testabili",
+  "role": "Tester",
+  "input": {
+    "pdr_ref": "TASK-001",
+    "deliverable_ref": "docs/deliverable-TASK-001.md",
+    "phases_requested": 3,
+    "phase_breakdown": {
+      "Fase 1": "Componente base + mock data + rendering statico",
+      "Fase 2": "Integrazione WebSocket reale + auto-reconnect + heartbeat",
+      "Fase 3": "Styling Tailwind completo + animazioni stati + accessibilità"
+    },
+    "constraints": [
+      "React 18 + Tailwind only",
+      "Zero dipendenze stato esterne",
+      "TypeScript strict mode",
+      "Ogni fase testabile indipendentemente",
+      "Dipendenze sequenziali: F1 → F2 → F3"
+    ],
+    "acceptance_criteria": [
+      "3 fasi distinte, non sovrapposte, ordinate logicamente",
+      "Ogni fase ha: scope, input, output, dipendenze, criteri test minimi",
+      "Piano riusabile per TASK-003 (implementazione F1) e TASK-004 (test F1)",
+      "Coerente con Release 0 (solo design, no implementazione reale moduli base)",
+      "Formato markdown strutturato, parsabile"
+    ]
+  },
+  "state": "COMPLETED",
+  "created_ts": "2026-07-05T02:30:00Z",
+  "depends_on": ["TASK-001"],
+  "outputs": {
+    "files_created": ["docs/deliverable-TASK-002.md"],
+    "summary": "Piano implementativo 3 fasi completato: F1 base+mock, F2 WebSocket, F3 styling+a11y. Matrice dipendenze F1→F2→F3. Criteri test per fase. Riusabile per TASK-003/004.",
+    "test_results": "PASS"
+  },
+  "log": [
+    {
+      "ts": "2026-07-05T02:30:00Z",
+      "actor": "DirettoreGenerale",
+      "event": "TASK_CREATED",
+      "task_id": "TASK-002"
+    },
+    {
+      "ts": "2026-07-05T02:35:00Z",
+      "actor": "Coordinatore",
+      "event": "VALIDATION_PASSED",
+      "task_id": "TASK-002",
+      "output": "ACK"
+    },
+    {
+      "ts": "2026-07-05T02:40:00Z",
+      "actor": "OpenCodeExecutor",
+      "event": "TASK_EXECUTED",
+      "task_id": "TASK-002"
+    },
+    {
+      "ts": "2026-07-05T02:45:00Z",
+      "actor": "OpenCodeExecutor",
+      "event": "TASK_COMPLETED",
+      "task_id": "TASK-002",
+      "output": "COMPLETED"
+    },
+    {
+      "ts": "2026-07-05T02:50:00Z",
+      "actor": "Coordinatore",
+      "event": "VALIDATION_PASSED",
+      "task_id": "TASK-002",
+      "output": "PASS_TO_TESTER"
+    },
+    {
+      "ts": "2026-07-05T02:55:00Z",
+      "actor": "Tester",
+      "event": "TEST_PASSED",
+      "task_id": "TASK-002",
+      "test_type": "contract",
+      "result": "PASS"
+    }
+  ]
+}

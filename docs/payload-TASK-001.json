@@ -1,0 +1,67 @@
+{
+  "task_id": "TASK-001",
+  "phase": "5",
+  "objective": "Definire specifica: dashboard React per stati agenti real-time",
+  "role": "Tester",
+  "input": {
+    "test_target": "TASK-001",
+    "test_type": "contract",
+    "expected_outcomes": [
+      "Payload completo per DirettoreGenerale",
+      "Validazione Coordinatore ACK",
+      "Deliverable OpenCode: specifica markdown",
+      "Log completa con transizioni stato"
+    ]
+  },
+  "state": "COMPLETED",
+  "created_ts": "2026-07-05T02:00:00Z",
+  "depends_on": [],
+  "outputs": {
+    "files_created": ["docs/payload-TASK-001.json", "docs/validation-report-TASK-001.md"],
+    "summary": "Specifica dashboard agenti definita e validata. Flusso Direttore→Coordinatore→Executor completato.",
+    "test_results": "PASS"
+  },
+  "log": [
+    {
+      "ts": "2026-07-05T02:00:00Z",
+      "actor": "DirettoreGenerale",
+      "event": "TASK_CREATED",
+      "task_id": "TASK-001"
+    },
+    {
+      "ts": "2026-07-05T02:05:00Z",
+      "actor": "Coordinatore",
+      "event": "VALIDATION_PASSED",
+      "task_id": "TASK-001",
+      "output": "ACK"
+    },
+    {
+      "ts": "2026-07-05T02:10:00Z",
+      "actor": "OpenCodeExecutor",
+      "event": "TASK_EXECUTED",
+      "task_id": "TASK-001"
+    },
+    {
+      "ts": "2026-07-05T02:15:00Z",
+      "actor": "OpenCodeExecutor",
+      "event": "TASK_COMPLETED",
+      "task_id": "TASK-001",
+      "output": "COMPLETED"
+    },
+    {
+      "ts": "2026-07-05T02:20:00Z",
+      "actor": "Coordinatore",
+      "event": "VALIDATION_PASSED",
+      "task_id": "TASK-001",
+      "output": "PASS_TO_TESTER"
+    },
+    {
+      "ts": "2026-07-05T02:25:00Z",
+      "actor": "Tester",
+      "event": "TEST_PASSED",
+      "task_id": "TASK-001",
+      "test_type": "contract",
+      "result": "PASS"
+    }
+  ]
+}
