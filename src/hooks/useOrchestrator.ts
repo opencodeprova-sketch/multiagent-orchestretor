@@ -15,6 +15,9 @@ import { WS_EVENT } from '../types/orchestrator';
 
 const WS_URL = import.meta.env.VITE_WS_URL ?? 'ws://localhost:8000/ws';
 const MAX_LOGS = 200;
+const WS_RECONNECT_BASE_MS = 1000;
+const WS_RECONNECT_MAX_MS = 30000;
+const WS_RECONNECT_MAX_ATTEMPTS = 10;
 
 const DEFAULT_SKILLS = [
   'ponytail', 'graphify', 'humanizer-it', 'ui-ux-pro-max',
@@ -63,9 +66,16 @@ function generateSummaryReport(payload: Record<string, unknown>): string {
   ].join('\n');
 }
 
+function getBackoffDelay(attempt: number): number {
+  // Esponenziale: 1s, 2s, 4s, 8s, 16s, 30s (cap)
+  return Math.min(WS_RECONNECT_BASE_MS * Math.pow(2, attempt), WS_RECONNECT_MAX_MS);
+}
+
 export function useOrchestrator() {
   const wsRef = useRef<WebSocket | null>(null);
   const reconnectRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reconnectAttemptRef = useRef(0);
+  const reconnectMaxedRef = useRef(false);
   const [state, setState] = useState<OrchestratorState>({
     connected: false,
     opencodeInstalled: false,
@@ -112,7 +122,25 @@ export function useOrchestrator() {
     return false;
   }, []);
 
+  const connectRef = useRef<() => void>(() => {});
+
+  const scheduleReconnect = useCallback(() => {
+    if (reconnectMaxedRef.current) return;
+
+    const attempt = reconnectAttemptRef.current;
+    if (attempt >= WS_RECONNECT_MAX_ATTEMPTS) {
+      reconnectMaxedRef.current = true;
+      setState((s) => ({ ...s, lastError: `WebSocket: ${WS_RECONNECT_MAX_ATTEMPTS} tentativi falliti. Ricarica pagina per riprovare.` }));
+      return;
+    }
+
+    const delay = getBackoffDelay(attempt);
+    reconnectAttemptRef.current = attempt + 1;
+    reconnectRef.current = setTimeout(() => connectRef.current(), delay);
+  }, []);
+
   const connect = useCallback(() => {
+    if (reconnectMaxedRef.current) return;
     if (wsRef.current?.readyState === WebSocket.OPEN || wsRef.current?.readyState === WebSocket.CONNECTING) {
       return;
     }
@@ -121,6 +149,8 @@ export function useOrchestrator() {
     wsRef.current = ws;
 
     ws.onopen = () => {
+      reconnectAttemptRef.current = 0;
+      reconnectMaxedRef.current = false;
       setState((s) => ({ ...s, connected: true, lastError: null }));
       ws.send(JSON.stringify({ type: WS_EVENT.PING, payload: {} }));
       // Auto-sync con OpenCode all'avvio
@@ -129,7 +159,7 @@ export function useOrchestrator() {
 
     ws.onclose = () => {
       setState((s) => ({ ...s, connected: false }));
-      reconnectRef.current = setTimeout(connect, 3000);
+      scheduleReconnect();
     };
 
     ws.onerror = () => {
@@ -348,9 +378,13 @@ export function useOrchestrator() {
           break;
       }
     };
-  }, []);
+  }, [scheduleReconnect]);
+
+  connectRef.current = connect;
 
   useEffect(() => {
+    reconnectAttemptRef.current = 0;
+    reconnectMaxedRef.current = false;
     connect();
     return () => {
       if (reconnectRef.current) clearTimeout(reconnectRef.current);
